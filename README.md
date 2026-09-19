@@ -23,12 +23,7 @@ vsce package --allow-missing-repository
 code --install-extension codebuddy-cli-launcher-1.0.0.vsix
 ```
 
-### 方式二：命令面板
-
-1. `Ctrl/Cmd + Shift + P` 打开命令面板
-2. 输入 `CodeBuddy CLI: 启动终端` 并回车
-
-### 方式三：从 GitHub Release 下载手动安装
+### 方式二：从 GitHub Release 下载手动安装
 
 1. 打开本仓库的 Releases 页面：<https://github.com/younguis/codebuddy-cli-launcher/releases>
 2. 下载最新的 `codebuddy-cli-launcher-1.0.0.vsix`
@@ -40,8 +35,10 @@ code --install-extension codebuddy-cli-launcher-1.0.0.vsix
 
 ## 使用
 
-- 点击编辑器标签页右上角的 CodeBuddy 图标，或
-- 命令面板执行 `CodeBuddy CLI: 启动终端`
+扩展安装并重新加载窗口后，任选其一启动 CLI：
+
+- **编辑器标题栏按钮**：点击编辑器标签页右上角的 CodeBuddy 图标
+- **命令面板**：`Ctrl/Cmd + Shift + P` 打开命令面板，输入 `CodeBuddy CLI: 启动终端` 并回车
 
 扩展会在右侧新开终端并自动执行 `cbc`，进入交互式 CLI。
 
