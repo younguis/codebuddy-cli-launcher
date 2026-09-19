@@ -41,6 +41,10 @@ code --install-extension codebuddy-cli-launcher-1.0.0.vsix
 | --- | --- | --- |
 | `codebuddyCli.launch` | `CodeBuddy CLI: 启动终端` | 在独立分组终端中启动 CodeBuddy CLI |
 
+## 平台支持
+
+Windows / macOS / Linux 均支持。扩展仅依赖 VS Code API 与 Node.js `child_process`，不含任何平台特定代码；只要目标平台上 `cbc` 已加入 `PATH`，即可正常使用。
+
 ## 工作原理
 
 扩展激活时注册命令；命令执行时：
