@@ -1,0 +1,39 @@
+{
+	"name": "codebuddy-cli-launcher",
+	"displayName": "CodeBuddy CLI 启动器",
+	"description": "编辑器标题栏与命令面板一键在独立分组终端中启动 CodeBuddy CLI (cbc)，纯净无依赖",
+	"version": "1.0.0",
+	"publisher": "jdgmr",
+	"icon": "assets/icon.png",
+	"engines": {
+		"vscode": "^1.85.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "codebuddyCli.launch",
+				"title": "启动终端",
+				"category": "CodeBuddy CLI",
+				"icon": {
+					"light": "assets/icon-titlebar.png",
+					"dark": "assets/icon-titlebar.png"
+				}
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "codebuddyCli.launch",
+					"group": "navigation"
+				}
+			]
+		}
+	}
+}
