@@ -1,8 +1,8 @@
 {
 	"name": "codebuddy-cli-launcher",
 	"displayName": "CodeBuddy CLI 启动器",
-	"description": "编辑器标题栏与命令面板一键在独立分组终端中启动 CodeBuddy CLI (cbc)，纯净无依赖",
-	"version": "1.0.0",
+	"description": "编辑器标题栏、命令面板与资源管理器一键在独立分组终端中启动 CodeBuddy CLI (cbc)，终端复用、纯净无依赖",
+	"version": "1.1.0",
 	"publisher": "jdgmr",
 	"repository": {
 		"type": "git",
@@ -29,12 +29,24 @@
 					"light": "assets/icon-titlebar.png",
 					"dark": "assets/icon-titlebar.png"
 				}
+			},
+			{
+				"command": "codebuddyCli.launchHere",
+				"title": "在此文件夹启动",
+				"category": "CodeBuddy CLI"
 			}
 		],
 		"menus": {
 			"editor/title": [
 				{
 					"command": "codebuddyCli.launch",
+					"group": "navigation"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "codebuddyCli.launchHere",
+					"when": "explorerResourceIsFolder",
 					"group": "navigation"
 				}
 			]

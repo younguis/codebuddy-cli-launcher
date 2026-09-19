@@ -7,8 +7,11 @@
 ## 功能特性
 
 - **独立分组终端**：点击按钮即在编辑器右侧（`ViewColumn.Beside`）新开一个终端分组并运行 `cbc`，不挤占当前编辑区
+- **终端复用**：已存在同名终端时仅聚焦该终端，不会重复开分组；同一工作区多次启动始终复用同一个
+- **自动工作目录**：从标题栏/命令面板启动时，终端 `cwd` 自动设为当前工作区根目录
 - **编辑器标题栏按钮**：编辑器右上角常驻启动图标（采用 CodeBuddy CN 桌面版图标）
 - **命令面板入口**：`Ctrl/Cmd + Shift + P` 输入 `CodeBuddy CLI: 启动终端`
+- **资源管理器右键**：在任意文件夹上右键 → 「CodeBuddy CLI: 在此文件夹启动」，于该文件夹内启动 CLI
 - **CLI 缺失检测**：未安装 `cbc` 时给出明确提示，不静默失败
 - **零依赖**：仅 `require('vscode')` 与 `child_process`，无 `node_modules`、无需打包构建
 
@@ -20,16 +23,16 @@
 # 需要已安装 Node.js 与 @vscode/vsce
 npm install -g @vscode/vsce
 vsce package --allow-missing-repository
-code --install-extension codebuddy-cli-launcher-1.0.0.vsix
+code --install-extension codebuddy-cli-launcher-1.1.0.vsix
 ```
 
 ### 方式二：从 GitHub Release 下载手动安装
 
 1. 打开本仓库的 Releases 页面：<https://github.com/younguis/codebuddy-cli-launcher/releases>
-2. 下载最新的 `codebuddy-cli-launcher-1.0.0.vsix`
+2. 下载最新的 `codebuddy-cli-launcher-1.1.0.vsix`
 3. 安装：
    ```bash
-   code --install-extension codebuddy-cli-launcher-1.0.0.vsix
+   code --install-extension codebuddy-cli-launcher-1.1.0.vsix
    ```
    或在 VS Code 扩展面板右上角 `…` → 「从 VSIX 安装」选择下载的文件
 
@@ -39,6 +42,9 @@ code --install-extension codebuddy-cli-launcher-1.0.0.vsix
 
 - **编辑器标题栏按钮**：点击编辑器标签页右上角的 CodeBuddy 图标
 - **命令面板**：`Ctrl/Cmd + Shift + P` 打开命令面板，输入 `CodeBuddy CLI: 启动终端` 并回车
+- **资源管理器右键**：在文件树中右键任意**文件夹** → 选择 `CodeBuddy CLI: 在此文件夹启动`
+
+标题栏/命令面板方式会在当前工作区根目录启动；右键方式会在你指定的文件夹内启动。两种方式均会复用同名终端，不会重复开分组。
 
 扩展会在右侧新开终端并自动执行 `cbc`，进入交互式 CLI。
 
@@ -46,7 +52,8 @@ code --install-extension codebuddy-cli-launcher-1.0.0.vsix
 
 | 命令 ID | 命令面板名称 | 说明 |
 | --- | --- | --- |
-| `codebuddyCli.launch` | `CodeBuddy CLI: 启动终端` | 在独立分组终端中启动 CodeBuddy CLI |
+| `codebuddyCli.launch` | `CodeBuddy CLI: 启动终端` | 在当前工作区根目录的独立分组终端中启动 CodeBuddy CLI |
+| `codebuddyCli.launchHere` | `CodeBuddy CLI: 在此文件夹启动` | 在资源管理器右键选中的文件夹内启动（也支持从命令面板调用） |
 
 ## 平台支持
 
@@ -56,9 +63,11 @@ Windows / macOS / Linux 均支持。扩展仅依赖 VS Code API 与 Node.js `chi
 
 扩展激活时注册命令；命令执行时：
 
-1. 调用 `vscode.window.createTerminal({ location: { viewColumn: ViewColumn.Beside } })` 在编辑器右侧新开一个终端分组；
-2. 通过 `execSync('cbc --version')` 探测 CLI 是否可用（缺失仅提示，不阻断启动）；
-3. `terminal.sendText('cbc')` 在终端中启动 CLI。
+1. 根据启动来源确定工作目录：标题栏/命令面板取当前工作区根目录，右键菜单取所选文件夹；
+2. 先按终端名（含目录名）查找是否已存在同名终端，存在则直接聚焦复用，不新建分组；
+3. 否则调用 `vscode.window.createTerminal({ cwd, location: { viewColumn: ViewColumn.Beside } })` 在编辑器右侧新开一个终端分组；
+4. 通过 `execSync('cbc --version')` 探测 CLI 是否可用（缺失仅提示，不阻断启动）；
+5. `terminal.sendText('cbc')` 在终端中启动 CLI。
 
 ## 目录结构
 
