@@ -28,6 +28,16 @@ code --install-extension codebuddy-cli-launcher-1.0.0.vsix
 1. `Ctrl/Cmd + Shift + P` 打开命令面板
 2. 输入 `CodeBuddy CLI: 启动终端` 并回车
 
+### 方式三：从 GitHub Release 下载手动安装
+
+1. 打开本仓库的 Releases 页面：<https://github.com/younguis/codebuddy-cli-launcher/releases>
+2. 下载最新的 `codebuddy-cli-launcher-1.0.0.vsix`
+3. 安装：
+   ```bash
+   code --install-extension codebuddy-cli-launcher-1.0.0.vsix
+   ```
+   或在 VS Code 扩展面板右上角 `…` → 「从 VSIX 安装」选择下载的文件
+
 ## 使用
 
 - 点击编辑器标签页右上角的 CodeBuddy 图标，或
