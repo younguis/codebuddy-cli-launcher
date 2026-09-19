@@ -4,6 +4,10 @@
 	"description": "编辑器标题栏与命令面板一键在独立分组终端中启动 CodeBuddy CLI (cbc)，纯净无依赖",
 	"version": "1.0.0",
 	"publisher": "jdgmr",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/younguis/codebuddy-cli-launcher.git"
+	},
 	"icon": "assets/icon.png",
 	"engines": {
 		"vscode": "^1.85.0"
